@@ -199,3 +199,56 @@
   box-shadow: 0 0 8px var(--neon-cyan);
   pointer-events: none;
 }
+
+/* Infinite Scrolling Marquee */
+.marquee-container {
+  overflow: hidden;
+  display: flex;
+  user-select: none;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+  padding: 2rem 0;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 1.5rem;
+  flex-shrink: 0;
+  min-width: 100%;
+  animation: marquee-scroll 35s linear infinite;
+}
+
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 0.75rem)); }
+}
+
+/* Floating Fluctuations for Team Cards with Staggered animations */
+.float-stagger-1 { animation: float-card 5s ease-in-out infinite; }
+.float-stagger-2 { animation: float-card 5s ease-in-out infinite 0.7s; }
+.float-stagger-3 { animation: float-card 5s ease-in-out infinite 1.4s; }
+.float-stagger-4 { animation: float-card 5s ease-in-out infinite 2.1s; }
+.float-stagger-5 { animation: float-card 5s ease-in-out infinite 2.8s; }
+.float-stagger-6 { animation: float-card 5s ease-in-out infinite 3.5s; }
+.float-stagger-7 { animation: float-card 5s ease-in-out infinite 4.2s; }
+
+@keyframes float-card {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* Float animation for the inner icon boxes for secondary fluctuation */
+.float-icon-slow {
+  animation: float-icon 4s ease-in-out infinite alternate;
+}
+
+@keyframes float-icon {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-6px) scale(1.03); }
+}
+

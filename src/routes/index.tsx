@@ -427,49 +427,97 @@ function Sponsors() {
 
 /* ------------ TEAM ------------ */
 function Team() {
-  const members = [
-    { name: "Arnab Banerjee", role: "Lead Organizer", initials: "AB" },
-    { name: "Riya Sharma", role: "Operations Head", initials: "RS" },
-    { name: "Kabir Mehta", role: "Sponsorship Lead", initials: "KM" },
-    { name: "Ananya Verma", role: "Tech Director", initials: "AV" },
-    { name: "Dev Kapoor", role: "Design Lead", initials: "DK" },
-    { name: "Ishita Roy", role: "Community Manager", initials: "IR" },
+  const organizers = [
+    { name: "Anuj Khan", role: "Lead Organizer", initials: "AK", color: "orange" },
+    { name: "Arnab Banerjee", role: "Lead Organizer", initials: "AB", color: "purple" },
   ];
+
+  const leads = [
+    { name: "Divyansh Kumar", role: "Management Lead", initials: "DK", color: "pink", floatClass: "float-stagger-1" },
+    { name: "Gourav Bhatiya", role: "Technical Lead", initials: "GB", color: "cyan", floatClass: "float-stagger-2" },
+    { name: "Aayush Arya", role: "Operations Lead", initials: "AA", color: "orange", floatClass: "float-stagger-3" },
+    { name: "Raghav Arora", role: "Social Media Lead", initials: "RA", color: "purple", floatClass: "float-stagger-4" },
+    { name: "Kabir Mehta", role: "Sponsorship Lead", initials: "KM", color: "blue", floatClass: "float-stagger-5" },
+    { name: "Dev Kapoor", role: "Design Lead", initials: "DKp", color: "pink", floatClass: "float-stagger-6" },
+    { name: "Ishita Roy", role: "Community Lead", initials: "IR", color: "cyan", floatClass: "float-stagger-7" },
+  ];
+
+  // Double the leads for seamless infinite loop scroll
+  const marqueeLeads = [...leads, ...leads];
+
   return (
-    <section id="team" className="relative py-32 px-6">
+    <section id="team" className="relative py-32 px-6 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-16">
           <SectionLabel>The Squad</SectionLabel>
-          <SectionTitle><span className="gradient-text">CORE TEAM</span></SectionTitle>
+          <SectionTitle><span className="gradient-text">ORGANIZERS</span></SectionTitle>
         </div>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
-          {members.map((m, i) => (
+
+        {/* Organizers Grid */}
+        <div className="flex flex-wrap justify-center gap-8 mb-24">
+          {organizers.map((m, i) => (
             <motion.div
               key={m.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
-              className="fortnite-panel p-5 text-center group"
+              transition={{ delay: i * 0.1 }}
+              className="fortnite-panel p-6 text-center group w-64 float-stagger-1"
             >
               <div
-                className="mx-auto w-20 h-20 mb-4 flex items-center justify-center font-display text-3xl text-background"
+                className="mx-auto w-24 h-24 mb-4 flex items-center justify-center font-display text-4xl text-background float-icon-slow"
                 style={{
-                  background: `linear-gradient(135deg, var(--neon-${["orange","cyan","pink","purple","blue","orange"][i]}), var(--neon-cyan))`,
+                  background: `linear-gradient(135deg, var(--neon-${m.color}), var(--neon-cyan))`,
                   clipPath: "polygon(20% 0, 100% 0, 80% 100%, 0 100%)",
                 }}
               >
                 {m.initials}
               </div>
-              <div className="font-display text-lg tracking-wider">{m.name}</div>
-              <div className="font-mono text-[10px] uppercase tracking-widest text-accent mt-1">{m.role}</div>
-              <div className="flex justify-center gap-2 mt-3 opacity-60 group-hover:opacity-100 transition">
-                <Twitter size={14} className="text-muted-foreground hover:text-accent" />
-                <Linkedin size={14} className="text-muted-foreground hover:text-accent" />
-                <Github size={14} className="text-muted-foreground hover:text-accent" />
+              <div className="font-display text-2xl tracking-wider">{m.name}</div>
+              <div className="font-mono text-xs uppercase tracking-widest text-accent mt-1">{m.role}</div>
+              <div className="flex justify-center gap-3 mt-4 opacity-60 group-hover:opacity-100 transition">
+                <Twitter size={16} className="text-muted-foreground hover:text-accent" />
+                <Linkedin size={16} className="text-muted-foreground hover:text-accent" />
+                <Github size={16} className="text-muted-foreground hover:text-accent" />
               </div>
             </motion.div>
           ))}
+        </div>
+
+        <div className="text-center mb-10">
+          <SectionTitle><span className="gradient-text">TEAM LEADS</span></SectionTitle>
+          <p className="text-muted-foreground mt-2 font-mono text-xs uppercase tracking-widest">
+            // Moving & Fluctuating Squad
+          </p>
+        </div>
+
+        {/* Team Leads Marquee */}
+        <div className="marquee-container">
+          <div className="marquee-content">
+            {marqueeLeads.map((m, i) => (
+              <div
+                key={`${m.name}-${i}`}
+                className={`fortnite-panel p-5 text-center group w-52 shrink-0 ${m.floatClass}`}
+              >
+                <div
+                  className="mx-auto w-20 h-20 mb-4 flex items-center justify-center font-display text-3xl text-background float-icon-slow"
+                  style={{
+                    background: `linear-gradient(135deg, var(--neon-${m.color}), var(--neon-cyan))`,
+                    clipPath: "polygon(20% 0, 100% 0, 80% 100%, 0 100%)",
+                  }}
+                >
+                  {m.initials}
+                </div>
+                <div className="font-display text-lg tracking-wider truncate">{m.name}</div>
+                <div className="font-mono text-[10px] uppercase tracking-widest text-accent mt-1 truncate">{m.role}</div>
+                <div className="flex justify-center gap-2 mt-3 opacity-60 group-hover:opacity-100 transition">
+                  <Twitter size={14} className="text-muted-foreground hover:text-accent" />
+                  <Linkedin size={14} className="text-muted-foreground hover:text-accent" />
+                  <Github size={14} className="text-muted-foreground hover:text-accent" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
